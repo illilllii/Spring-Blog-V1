@@ -19,13 +19,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests()
-		.antMatchers("/user", "/post").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+		.antMatchers("/user/**", "/post/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 		.antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
 		.anyRequest().permitAll()
 		.and()
 		.formLogin()
 		.loginPage("/loginForm")// x-www-form-urlencoded
-		.loginProcessingUrl("/login");// 스프링 시큐리티가 Post방식의 "/login" 주소가 들어오면 낚아챈다.
+		.loginProcessingUrl("/login")// 스프링 시큐리티가 Post방식의 "/login" 주소가 들어오면 낚아챈다.
+//		.successHandler(new AuthenticationSuccessHandler() {
+//			
+//			@Override
+//			public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+//					Authentication authentication) throws IOException, ServletException {
+//				response.sendRedirect("/");
+//				
+//			}
+//		});
+		.defaultSuccessUrl("/");
 		
 	}
 }
