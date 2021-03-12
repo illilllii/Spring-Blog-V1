@@ -6,8 +6,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.cos.blog.config.oauth.OAuth2DetailsService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Configuration // IoC 등록
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+
+	private final OAuth2DetailsService oAuth2DetailsService;
 	
 	// IoC등록만 하면 AuthenticationManager가 Bcrypt로 자동 검증해줌.
 	@Bean
@@ -35,7 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //				
 //			}
 //		});
-		.defaultSuccessUrl("/");
+		.defaultSuccessUrl("/")
+		.and()
+		.oauth2Login()
+		.userInfoEndpoint()
+		.userService(oAuth2DetailsService);
 		
 	}
 }
