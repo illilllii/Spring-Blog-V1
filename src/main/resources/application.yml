@@ -44,6 +44,13 @@ spring:
             scope:
             - email
             - profile
+
+          facebook:
+            client-id: 2900027036953220
+            client-secret: 59bc5f2c9ad228c102d2805a43ba9734
+            scope:
+            - email
+            - public_profile
           
           naver:
             client-id: Akvrsz2Y6xQTpM9tXT2M
@@ -78,11 +85,6 @@ spring:
             user-name-attribute: id
            
             
-#          facebook:
-#            client-id: 256280414173-ao03irqngbolji4ula5pmqa78e46tesn.apps.googleusercontent.com
-#            client-secret: P3z9BSTTeMpejbSnS16hKV7f
-#            scope:
-#            - email
-#            - public_profile
+
 
 
